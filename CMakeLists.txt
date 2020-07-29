@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 project (loxpp)
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 14)
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h")
 include_directories(src)
 add_executable (loxpp ${SOURCES})
