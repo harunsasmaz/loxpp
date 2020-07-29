@@ -227,3 +227,51 @@ fun returnSum(a, b) {
 
 If execution reaches the end of the block without hitting a <code>return,</code> it implicitly returns <code>nil</code>.
 
+#### Closures
+
+Functions are first class in Lox, which just means they are real values that you can get a reference to, store in variables, pass around, etc. This works:
+
+```javascript
+fun addPair(a, b) {
+  return a + b;
+}
+
+fun identity(a) {
+  return a;
+}
+
+print identity(addPair)(1, 2); // Prints "3".
+```
+
+Since function declarations are statements, you can declare local functions inside another function:
+
+```javascript
+fun outerFunction() {
+  fun localFunction() {
+    print "I'm local!";
+  }
+
+  localFunction();
+}
+```
+
+If you combine local functions, first-class functions, and block scope, you run into this interesting situation:
+
+```javascript
+fun returnFunction() {
+  var outside = "outside";
+
+  fun inner() {
+    print outside;
+  }
+
+  return inner;
+}
+
+var fn = returnFunction();
+fn();
+```
+
+### Classes
+
+
