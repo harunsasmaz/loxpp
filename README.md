@@ -274,4 +274,90 @@ fn();
 
 ### Classes
 
+```java
+class Breakfast {
+  cook() {
+    print "Eggs a-fryin'!";
+  }
 
+  serve(who) {
+    print "Enjoy your breakfast, " + who + ".";
+  }
+}
+
+// Store it in variables.
+var someVariable = Breakfast;
+
+// Pass it to functions.
+someFunction(Breakfast);
+
+var breakfast = Breakfast();
+print breakfast; // "Breakfast instance".
+```
+
+#### Instantiation & Initialization
+
+```java
+breakfast.meat = "sausage";
+breakfast.bread = "sourdough";
+```
+
+Assigning to a field creates it if it doesn’t already exist.
+
+If you want to access a field or method on the current object from within a method, you use good old this:
+
+```java
+class Breakfast {
+  serve(who) {
+    print "Enjoy your " + this.meat + " and " +
+        this.bread + ", " + who + ".";
+  }
+
+  // ...
+}
+```
+
+Part of encapsulating data within an object is ensuring the object is in a valid state when it’s created. To do that, you can define an initializer. If your class has a method named init(), it is called automatically when the object is constructed. Any parameters passed to the class are forwarded to its initializer:
+
+```java
+class Breakfast {
+  init(meat, bread) {
+    this.meat = meat;
+    this.bread = bread;
+  }
+
+  // ...
+}
+
+var baconAndToast = Breakfast("bacon", "toast");
+baconAndToast.serve("Dear Reader");
+// "Enjoy your bacon and toast, Dear Reader."
+```
+
+#### Inheritance
+
+```java
+class Brunch < Breakfast {
+  drink() {
+    print "How about a Bloody Mary?";
+  }
+}
+```
+
+Here, Brunch is the derived class or subclass, and Breakfast is the base class or superclass. Every method defined in the superclass is also available to its subclasses:
+
+```java
+var benedict = Brunch("ham", "English muffin");
+benedict.serve("Noble Reader");
+```
+
+As in Java, you can use super:
+
+```java
+class Brunch < Breakfast {
+  init(meat, bread, drink) {
+    super.init(meat, bread);
+    this.drink = drink;
+  }
+}
+```
